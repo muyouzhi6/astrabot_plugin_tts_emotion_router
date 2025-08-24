@@ -14,15 +14,15 @@ import importlib
 from typing import Dict, List, Optional
 import asyncio
 
-def _ensure_compatible_astrbot():
+def _ensure_compatible_astrabot():
     """确保 astrbot API 兼容；若宿主 astrbot 不满足需要，则回退到插件自带的 AstrBot。"""
     _PLUGIN_DIR = Path(__file__).parent
     _VENDORED_ROOT = _PLUGIN_DIR / "AstrBot"
-    _VENDORED_ASTROBOT = _VENDORED_ROOT / "astrbot"
+    _VENDORED_ASTRABOT = _VENDORED_ROOT / "astrbot"
     root_str = str(_PLUGIN_DIR.resolve())
 
     def _import_host_first():
-        if _VENDORED_ASTROBOT.exists() and "astrbot" not in sys.modules:
+        if _VENDORED_ASTRABOT.exists() and "astrbot" not in sys.modules:
             _orig = list(sys.path)
             try:
                 # 临时移除插件路径，优先导入宿主 AstrBot
@@ -48,7 +48,7 @@ def _ensure_compatible_astrbot():
             if str(_VENDORED_ROOT) not in sys.path:
                 sys.path.insert(0, str(_VENDORED_ROOT))
             importlib.import_module("astrbot")
-            logging.info("TTSEmotionRouter: forced to vendored AstrBot: %s", (_VENDORED_ASTROBOT / "__init__.py").as_posix())
+            logging.info("TTSEmotionRouter: forced to vendored AstrBot: %s", (_VENDORED_ASTRABOT / "__init__.py").as_posix())
         except Exception:
             pass
 
@@ -58,11 +58,11 @@ def _ensure_compatible_astrbot():
     except Exception:
         pass
     # 2) 若不兼容，则强制改用内置 AstrBot
-    if not _is_compatible() and _VENDORED_ASTROBOT.exists():
+    if not _is_compatible() and _VENDORED_ASTRABOT.exists():
         _force_vendored()
 
 try:
-    _ensure_compatible_astrbot()
+    _ensure_compatible_astrabot()
 except Exception:
     pass
 
@@ -364,7 +364,7 @@ class TTSEmotionRouter(Star):
             import shutil
             
             # 使用系统临时目录
-            temp_dir = Path(tempfile.gettempdir()) / "astrbot_audio"
+            temp_dir = Path(tempfile.gettempdir()) / "astrabot_audio"
             temp_dir.mkdir(exist_ok=True)
             
             # 生成新的文件名

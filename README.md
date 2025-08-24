@@ -1,4 +1,4 @@
-# astrbot_plugin_tts_emotion_router
+# astrabot_plugin_tts_emotion_router
 
 按情绪路由到不同音色与语速的 TTS 插件（硅基流动 API，其他OpenAI语音接口api同样适配）。
 可配合STT插件：https://github.com/NickCharlie/Astrbot-Voice-To-Text-Plugin 实现和Bot全语音对话。
